@@ -46,7 +46,12 @@ jobs:
           command: npm run lint
       - run:
           name: Test
-          command: npm run test
+          command: |
+            echo 'export MONGO_URI=${MONGO_URI}' >> $BASH_ENV
+            echo 'export JWT_SECRET=${JWT_SECRET}' >> $BASH_ENV
+            echo 'export UUID_NAMESPACE=${UUID_NAMESPACE}' >> $BASH_ENV
+            source $BASH_ENV
+            npm run test
 
 workflows:
   version: 2
