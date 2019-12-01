@@ -9,7 +9,8 @@ jobs:
       - checkout
       - save_cache:
           key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}-{{ arch }}
-          paths: ~/workspace
+          paths:
+            - ~/workspace
 
   # Install bundle dependecies
   bundle-dependencies:
