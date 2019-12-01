@@ -38,6 +38,9 @@ To run the tests:
 npm test
 ```
 
+## Support
+Over `.postman` folder you can find the `collections` and `environment vars` for `Postman` or `Insomnia`.
+
 ### Some points of improvement
   - Uncouple payload validation from controllers
   - User aws vault for the environment vars
