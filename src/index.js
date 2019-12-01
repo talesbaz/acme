@@ -21,4 +21,4 @@ error.forEach(errorFunction => {
   app.use(errorFunction[Object.keys(errorFunction)]);
 });
 
-module.exports = app.listen(process.env.NODE_ENV === 'TEST' ? 5000 : 3000);
+module.exports = app.listen(process.env.NODE_ENV === 'TEST' ? 5000 : process.env.PORT || 3000);
