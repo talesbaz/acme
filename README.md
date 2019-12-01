@@ -45,4 +45,5 @@ Over `.postman` folder you can find the `collections` and `environment vars` for
   - Uncouple payload validation from controllers
   - User aws vault for the environment vars
   - Fix some structure names
+  - Add swagger
   - Add api versioning standard like `api/v1/xxx`

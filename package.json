@@ -10,9 +10,12 @@
     "test": "NODE_ENV=TEST mocha --exit",
     "coverage": "NODE_ENV=TEST nyc --reporter=html --reporter=text mocha --exit --timeout 1000",
     "start": "pm2-runtime start ./ecosystem.config.js --env production",
-    "start-dev": "NODE_ENV=DEV nodemon src/index.js"
+    "start:dev": "NODE_ENV=DEV nodemon src/index.js"
   },
-  "keywords": ["api", "node"],
+  "keywords": [
+    "api",
+    "node"
+  ],
   "author": "T. Baz <talesbaz@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -50,6 +53,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.12",
     "pm2": "^4.2.0",
+    "swagger-ui-express": "^4.1.2",
     "uuid": "^3.3.3"
   }
 }
