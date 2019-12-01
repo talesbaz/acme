@@ -9,7 +9,7 @@
     "lint": "eslint src/",
     "test": "NODE_ENV=TEST mocha --exit",
     "coverage": "NODE_ENV=TEST nyc --reporter=html --reporter=text mocha --exit --timeout 1000",
-    "start": "pm2 start src/index.js -i 0 --na  me \"api\"",
+    "start": "pm2 start src/index.js -i 0 --name \"api\"",
     "start-dev": "NODE_ENV=DEV nodemon src/index.js"
   },
   "keywords": ["api", "node"],
