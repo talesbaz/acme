@@ -1,0 +1,69 @@
+version: 2
+jobs:
+  # The checkout job
+  checkout-code:
+    working_directory: ~/workspace
+    docker:
+      - image: circleci/node:10.10
+    steps:
+      - checkout
+      - save_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}-{{ arch }}
+          paths: ~/workspace
+
+  # Install bundle dependecies
+  bundle-dependencies:
+    working_directory: ~/workspace
+    docker:
+      - image: circleci/node:10.10
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}-{{ arch }}
+      - run:
+          name: Avoid hosts unknown for github
+          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: v1-dependencies-{{ .Environment.CIRCLE_SHA1 }}-{{ arch }}
+          paths:
+            - node_modules
+
+  # The test job
+  test:
+    working_directory: ~/workspace
+    docker:
+      - image: circleci/node:10.10
+    steps:
+      - restore_cache:
+          key: v1-repo-{{ .Environment.CIRCLE_SHA1 }}-{{ arch }}
+      - restore_cache:
+          key: v1-dependencies-{{ .Environment.CIRCLE_SHA1 }}-{{ arch }}
+      - run:
+          name: Lint
+          command: npm run lint
+      - run:
+          name: Test
+          command: npm run test
+
+workflows:
+  version: 2
+  backend_pipeline:
+    jobs:
+      - checkout-code:
+          filters:
+            tags:
+              only: /.*/
+      - bundle-dependencies:
+          requires:
+            - checkout-code
+          filters:
+            tags:
+              only: /.*/
+      - test:
+          requires:
+            - bundle-dependencies
+          filters:
+            tags:
+              only: /.*/

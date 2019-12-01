@@ -1,7 +1,7 @@
 {
   "name": "acme",
   "version": "1.0.0",
-  "description": "",
+  "description": "acme api",
   "main": "index.js",
   "scripts": {
     "db:start": "docker run --rm -d -p 27017:27017 -p 28017:28017 --name sky_mongodb -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=password mongo",
@@ -12,9 +12,22 @@
     "start": "pm2 start src/index.js -i 0 --na  me \"api\"",
     "start-dev": "NODE_ENV=DEV nodemon src/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": ["api", "node"],
+  "author": "T. Baz <talesbaz@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/talesbaz/acme.git"
+  },
+  "bugs": {
+    "type": "git",
+    "url": "git+https://github.com/talesbaz/acme/issues"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "chai": "^4.2.0",
@@ -23,6 +36,7 @@
     "eslint-config-yara": "^2.3.2",
     "eslint-plugin-jest": "^23.0.4",
     "eslint-plugin-react": "^7.16.0",
+    "husky": "^3.1.0",
     "mocha": "^6.2.2",
     "nodemon": "^2.0.1",
     "nyc": "^14.1.1",
